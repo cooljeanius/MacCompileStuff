@@ -45,4 +45,4 @@ rm -rf "${HEADERS_PATH}/ogg"
 mkdir "${HEADERS_PATH}/ogg"
 cp -rf "${SOURCES_PATH}/libogg/include/ogg/"*.h "${HEADERS_PATH}/ogg/"
 echo "==> DONE ..."
-echo
+echo ""
