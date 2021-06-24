@@ -65,16 +65,22 @@ export PKG_CONFIG_PATH="${SCRIPTS_PATH}/pkgconfig"
 
 export SDKPATH="$(xcodebuild -sdk macosx -version Path)"
 export MACOSX_DEPLOYMENT_TARGET='10.11'
-if [ "x${SET_MORE_FLAGS}" = "x" ]; then
+if [ "x${SET_MORE_FLAGS}" = "xyes" ]; then
   export MIN_SUPPORTED_MACOSX_DEPLOYMENT_TARGET='10.11'
   export LDFLAGS="-isysroot ${SDKPATH} -mmacosx-version-min=10.11 -L${LIBS_PATH}"
   export CFLAGS="-isysroot ${SDKPATH} -stdlib=libc++ -mmacosx-version-min=10.11 -I${HEADERS_PATH}"
   export CXXFLAGS="-isysroot ${SDKPATH} -stdlib=libc++ -mmacosx-version-min=10.11 -I${HEADERS_PATH}"
 fi
 
-export LDFLAGS_X86_64="-arch x86_64 --target=x86_64-apple-macos10.11 ${LDFLAGS}"
-export CFLAGS_X86_64="-arch x86_64 --target=x86_64-apple-macos10.11 ${CFLAGS}"
-export CXXFLAGS_X86_64="-arch x86_64 --target=x86_64-apple-macos10.11 ${CXXFLAGS}"
-export LDFLAGS_ARM64="-arch arm64 --target=arm64-apple-macos10.11 ${LDFLAGS}"
-export CFLAGS_ARM64="-arch arm64 --target=arm64-apple-macos10.11 ${CFLAGS}"
-export CXXFLAGS_ARM64="-arch arm64 --target=arm64-apple-macos10.11 ${CXXFLAGS}"
+export SET_MORE_X86_64_FLAGS="yes"
+if [ "x${SET_MORE_X86_64_FLAGS}" = "xyes" ]; then
+  export LDFLAGS_X86_64="-arch x86_64 --target=x86_64-apple-macos10.11 ${LDFLAGS}"
+  export CFLAGS_X86_64="-arch x86_64 --target=x86_64-apple-macos10.11 ${CFLAGS}"
+  export CXXFLAGS_X86_64="-arch x86_64 --target=x86_64-apple-macos10.11 ${CXXFLAGS}"
+fi
+export SET_MORE_ARM64_FLAGS="yes"
+if [ "x${SET_MORE_ARM64_FLAGS}" = "xyes" ]; then
+  export LDFLAGS_ARM64="-arch arm64 --target=arm64-apple-macos10.11 ${LDFLAGS}"
+  export CFLAGS_ARM64="-arch arm64 --target=arm64-apple-macos10.11 ${CFLAGS}"
+  export CXXFLAGS_ARM64="-arch arm64 --target=arm64-apple-macos10.11 ${CXXFLAGS}"
+fi
